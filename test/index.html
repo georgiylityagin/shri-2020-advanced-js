@@ -7,6 +7,11 @@
   <title>Tests</title>
 </head>
 <body>
+  <h1 style="margin-left: 3rem;">Тесты</h1>
+  <strong style="margin-left: 3rem;">
+    Результаты некоторых тестов выводятся в консоль.
+  </strong>
+
   <div id="mocha"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js" integrity="sha256-sMMA1cOFAFz/t0L4VJaaewaXG1CdvRf+habglhQFKbQ=" crossorigin="anonymous"></script>
@@ -18,17 +23,19 @@
 
   <script>
     const assert = chai.assert;
+    const expect = chai.expect;
   </script>
 
   <script src="../src/allKeysAndSymbols.js"></script>
-
   <script src="./allKeysAndSymbols.test.js"></script>
+
+  <script src="../src/proxyIn.js"></script>
+
+  <script src="../src/asyncExecutor.js"></script>
 
   <script class="mocha-exec">
     mocha.run();
   </script>
 
-  <script src="../src/proxyIn.js"></script>
-  
 </body>
 </html>
