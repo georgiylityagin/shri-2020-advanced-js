@@ -3,48 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/7.1.1/mocha.min.css" integrity="sha256-zX6KvfdhTfwaVsK5hogXY+wWW9Nf3wyloswn7WLZ9dg=" crossorigin="anonymous" />
   <title>Tests</title>
 </head>
 <body>
-  <h1>Тесты</h1>
+  <div id="mocha"></div>
 
-  <script type="module">
-    import allKeysAndSymbols from '../src/allKeysAndSymbols.js';
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.min.js" integrity="sha256-sMMA1cOFAFz/t0L4VJaaewaXG1CdvRf+habglhQFKbQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/7.1.1/mocha.min.js" integrity="sha256-I1+hwWT6Ltn0nj8IfPQVkzFC1Yk2I/mFTY/XznX/jII=" crossorigin="anonymous"></script>
 
-    const symbol1 = Symbol("symbol 1");
-    const symbol2 = Symbol("symbol 2");
-    const symbol3 = Symbol("symbol 3");
+  <script class="mocha-init">
+    mocha.setup('bdd');
+  </script>
 
-    const objProto1 = {
-      a: 1,
-      b: 2,
-      c: 3,
-      [symbol1]: 'symbol 1'
-    };
+  <script>
+    const assert = chai.assert;
+  </script>
 
-    const objProto2 = Object.create(objProto1, {
-      x: { value: 'la' },
-      y: { value: 'la-la' },
-      z: { value: 'la-la-la' },
-      [symbol2]: { value: 'symbol 2' },
-    });
+  <script src="../src/allKeysAndSymbols.js"></script>
 
-    const objectTested1 = Object.create(objProto2, {
-      [symbol3]: { value: 'symbol 3' }
-    });
+  <script src="./allKeysAndSymbols.test.js"></script>
 
-    const objectTested2 = {};
+  <script class="mocha-exec">
+    mocha.run();
+  </script>
 
-    const objectTested3 = Object.create(null, {});
-
-    console.log('Тест №1:');
-    console.table(allKeysAndSymbols(objectTested1));
-
-    console.log('Тест №2:');
-    console.table(allKeysAndSymbols(objectTested2));
-
-    console.log('Тест №3:');
-    console.log(allKeysAndSymbols(objectTested3));
+  <script>
+    console.log(Object.getOwnPropertyNames(Object.prototype))
   </script>
 
 </body>

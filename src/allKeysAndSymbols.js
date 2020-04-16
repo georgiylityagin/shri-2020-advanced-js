@@ -1,4 +1,4 @@
-export default (object) => {
+const allKeysAndSymbols = (object) => {
   let ownKeysAndSymbols = [].concat(
     Object.getOwnPropertyNames(object),
     Object.getOwnPropertySymbols(object)
@@ -17,3 +17,5 @@ export default (object) => {
 
   return allKeysAndSymbols;
 };
+
+// export { allKeysAndSymbols };
