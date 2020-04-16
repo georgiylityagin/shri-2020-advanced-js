@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tests</title>
+</head>
+<body>
+  <h1>Тесты</h1>
+
+  <script type="module">
+    import allKeysAndSymbols from '../src/allKeysAndSymbols.js';
+
+    const symbol1 = Symbol("symbol 1");
+    const symbol2 = Symbol("symbol 2");
+    const symbol3 = Symbol("symbol 3");
+
+    const objProto1 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      [symbol1]: 'symbol 1'
+    };
+
+    const objProto2 = Object.create(objProto1, {
+      x: { value: 'la' },
+      y: { value: 'la-la' },
+      z: { value: 'la-la-la' },
+      [symbol2]: { value: 'symbol 2' },
+    });
+
+    const objectTested1 = Object.create(objProto2, {
+      [symbol3]: { value: 'symbol 3' }
+    });
+
+    const objectTested2 = {};
+
+    const objectTested3 = Object.create(null, {});
+
+    console.log('Тест №1:');
+    console.table(allKeysAndSymbols(objectTested1));
+
+    console.log('Тест №2:');
+    console.table(allKeysAndSymbols(objectTested2));
+
+    console.log('Тест №3:');
+    console.log(allKeysAndSymbols(objectTested3));
+  </script>
+
+</body>
+</html>
