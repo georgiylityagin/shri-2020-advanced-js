@@ -1,5 +1,9 @@
 class MySet {
 
+  get [Symbol.toStringTag]() {
+    return 'MySet';
+  }
+
   *[Symbol.iterator]() {
     for (let elem of this.data) {
       yield elem;
@@ -10,11 +14,10 @@ class MySet {
     this.data = [];
     this.size = 0;
 
+    if (!iterable) return;
+
     for (let elem of iterable) {
-      if (!this.data.includes(elem)) {
-        this.data.push(elem);
-        this.size++;
-      }
+      this.add(elem);
     }
   }
 
@@ -36,7 +39,7 @@ class MySet {
   }
 
   add(elem) {
-    if (!this.data.includes(elem)) {
+    if (elem && !this.data.includes(elem)) {
       this.data.push(elem);
       this.size++;
     }
@@ -47,11 +50,20 @@ class MySet {
 
     if (pos !== -1) {
       this.data.splice(pos, 1);
+      this.size--;
     }
   }
 
   has(elem) {
     return this.data.includes(elem);
+  }
+
+  forEach(cb, context) {
+    if (!context) {
+      this.data.forEach(cb);
+    } else {
+      this.data.forEach(cb.bind(context))
+    }
   }
 
 }
@@ -117,3 +129,8 @@ console.log('%cКое-что еще:', 'color: blue')
 console.log('set === set.valueOf() ', set === set.valueOf()) // true
 console.log('String(set) ', String(set)) // [object MySet]
 console.log('Object.prototype.toString.call(set) ', Object.prototype.toString.call(set)) // [object MySet]
+
+console.log('%cЕсть forEach, который делает какие-то странные вещи:', 'color: blue');
+set.forEach(function (item) {
+  console.log(item.getValue.call(this)); // 42
+}, data)
